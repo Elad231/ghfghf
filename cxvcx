@@ -32,14 +32,14 @@ ReplicatedFirst:RemoveDefaultLoadingScreen()
 local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -4)
 local tween = TweenService:Create(loadingRing, tweenInfo, {Rotation = 360})
 
-
+wait(0)
 textLabel.Text = "Elad: whitelist checker"
 textLabel.Text = ""
 loadingRing.Visible = true
 tween:Play()
+wait(1)
 
-
-local playerss = {"pookmaster21345","daniel6122_d","Kaido_BBB","name","name",}
+local playerss = {"","name"}
 
 for _, v in pairs(game.Players:GetChildren()) do
 
@@ -48,7 +48,7 @@ for _, v in pairs(game.Players:GetChildren()) do
 textLabel.Text = "Welcome " ..game.Players.LocalPlayer.name..""
 
 loadingRing.Visible = false
-
+wait(0)
 screenGui:Destroy()
 break
 else
@@ -74,9 +74,9 @@ response(
 
 loadingRing.Visible = false
 textLabel.Text = "You have no access: " ..game.Players.LocalPlayer.name.. ""
-
+wait(0)
 textLabel.Text = "Discord: Elad#6900 "
-
+wait(0)
 game:Shutdown();
 
         end
